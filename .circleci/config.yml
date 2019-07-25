@@ -21,7 +21,7 @@ jobs:
             export VERSION=$(git log --format=%B -n1)
             export GOOS=darwin
             export GOARCH=amd64
-            go build -ldflags "-X main.Version=$VERSION" -o temp/gndmq
+            go build -ldflags "-X main.Version=$VERSION" -o temp/qndmq
             cp LICENSE README.md temp/
             cd temp
             zip ../release/qndmq-${GOOS}-${GOARCH}.zip *
@@ -35,7 +35,7 @@ jobs:
             export VERSION=$(git log --format=%B -n1)
             export GOOS=linux
             export GOARCH=amd64
-            go build -ldflags "-X main.Version=$VERSION" -o temp/gndmq
+            go build -ldflags "-X main.Version=$VERSION" -o temp/qndmq
             cp LICENSE README.md temp/
             cd temp
             zip ../release/qndmq-${GOOS}-${GOARCH}.zip *
@@ -49,7 +49,7 @@ jobs:
             export VERSION=$(git log --format=%B -n1)
             export GOOS=windows
             export GOARCH=amd64
-            go build -ldflags "-X main.Version=$VERSION" -o temp/gndmq.exe
+            go build -ldflags "-X main.Version=$VERSION" -o temp/qndmq.exe
             cp LICENSE README.md temp/
             cd temp
             zip ../release/qndmq-${GOOS}-${GOARCH}.zip * 
