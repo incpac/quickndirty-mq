@@ -40,5 +40,12 @@ export QNDMQ_USERNAME=username
 export QNDMQ_PASSWORD=password
 export QNDMQ_QUEUE=queue
 
-/qndmq post Hello World!
+qndmq post Hello World!
 ```
+
+## Credits
+
+This project is made possible by the following awesome people:
+
++ [spf13](https://github.com/spf13) for [Cobra](https://github.com/spf13/cobra) released under the [Apache 2.0 license](https://github.com/spf13/cobra/blob/master/LICENSE.txt).
++ [vcabbage](https://github.com/vcabbage) for [amqp](https://github.com/vcabbage/amqp) released uder the [MIT license](https://github.com/vcabbage/amqp/blob/master/LICENSE)
