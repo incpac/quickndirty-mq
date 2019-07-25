@@ -40,7 +40,7 @@ export QNDMQ_USERNAME=username
 export QNDMQ_PASSWORD=password
 export QNDMQ_QUEUE=queue
 
-/qndmq post Hello World!
+qndmq post Hello World!
 ```
 
 ## Credits
