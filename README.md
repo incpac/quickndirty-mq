@@ -49,4 +49,4 @@ This project is made possible by the following awesome people:
 
 + [spf13](https://github.com/spf13) for [Cobra](https://github.com/spf13/cobra) released under the [Apache 2.0 license](https://github.com/spf13/cobra/blob/master/LICENSE.txt).
 + [vcabbage](https://github.com/vcabbage) for 1.0 compatible [amqp](https://github.com/vcabbage/amqp) released uder the [MIT license](https://github.com/vcabbage/amqp/blob/master/LICENSE)
-+ [streaway](https://github.com/streadway) for 0.9.1 compatible [amqp](https://github.com/streadway/amqp) released under the [BSD license]()https://github.com/streadway/amqp/blob/master/LICENSE
++ [streadway](https://github.com/streadway) for 0.9.1 compatible [amqp](https://github.com/streadway/amqp) released under the [BSD license]()https://github.com/streadway/amqp/blob/master/LICENSE
