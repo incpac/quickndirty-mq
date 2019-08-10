@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
+	"github.com/incpac/quiet"
+	"github.com/incpac/quiet/config"
 	"github.com/spf13/cobra"
-	"pack.ag/amqp"
 )
 
 var Version string
@@ -17,33 +19,50 @@ var password string
 var queueName string
 
 
-func post(cmd *cobra.Command, args []string) {
+func createConnection() quiet.Client {
+	conf := config.ParseString(connectionString)
 
-	_, err := amqp.Dial(connectionString, amqp.ConnSASLPlain(username, password))
-	if err != nil {
-		if err.Error() == "unexpected protocol version 0.9.1" {
-			ohpointninePost(cmd, args)
-		} else {
-			log.Fatal(err)
-		}
-	} else {
-		onepointohPost(cmd, args)
+	if username != "" {
+		conf.Username = username 
 	}
+
+	if password != "" {
+		conf.Password = password
+	}
+
+	if queueName != "" {
+		conf.Queue = queueName
+	}
+
+	c, err := quiet.NewClient(conf) 
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return c
+}
+
+func post(m string) {
+	c := createConnection()
+
+	c.Post(m)
+	c.Close()
 }
 
 
-func watch(cmd *cobra.Command, args []string) {
+func watch() {
+	c := createConnection()
+	
+	c.Watch(func(s string) {
+		log.Printf("Message received: %s", s)
+	})
 
-	_, err := amqp.Dial(connectionString, amqp.ConnSASLPlain(username, password))
-	if err != nil {
-		if err.Error() == "unexpected protocol version 0.9.1" {
-			ohpointnineWatch(cmd, args)
-		} else {
-			log.Fatal("Failed to determine protocol:", err)
-		}
-	} else {
-		onepointohWatch(cmd, args)
-	}
+	log.Println("Watching queue...")
+
+	// run forever
+	for {}
+
+	c.Close()
 }
 
 
@@ -64,7 +83,9 @@ func main() {
 		Short: "Post a message to the queue",
 		Long:  "Post a message to the queue",
 		Args:  cobra.MinimumNArgs(1),
-		Run:   post,
+		Run:   func(cmd *cobra.Command, args []string) {
+			post(strings.Join(args, " "))
+		},
 	}
 
 	postCommand.Flags().StringVarP(&connectionString,	"connection",	"c",	os.Getenv("QNDMQ_CONNECTION"),	"The connection string for the Active MQ server")
@@ -79,7 +100,9 @@ func main() {
 		Use:   "watch",
 		Short: "Watch the queue for new messages",
 		Long:  "Watch the queue for new messages",
-		Run:   watch,
+		Run:   func(cmd *cobra.Command, args []string) {
+			watch()
+		},
 	}
 
 	watchCommand.Flags().StringVarP(&connectionString,	"connection",	"c",	os.Getenv("QNDMQ_CONNECTION"),	"The connection string for the Active MQ server")
