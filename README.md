@@ -21,13 +21,13 @@ For a full list of commands and flags see `qndmq help`
 ### Watching the queue
 
 ```bash
-qndmq watch -connection amqp://myamqpserver.example.com -u username -p password -q queue
+qndmq watch -connection amqp://myamqpserver.example.com:5672 -u username -p password -q queue
 ```
 
 ### Pushing a message to the queue
 
 ```bash
-qndmq post -connection amqp://myamqpserver.example.com -u username -p password -q queue Hello World!
+qndmq post -connection amqp://username:passwordmyamqpserver.example.com:5672 -q queue Hello World!
 ```
 
 ### Environment variables
@@ -35,7 +35,7 @@ qndmq post -connection amqp://myamqpserver.example.com -u username -p password -
 An alternative to passing through configuration via flags is to preset it as environment variables.
 
 ```bash
-export QNDMQ_CONNECTION=amqp://myamqpserver.example.com
+export QNDMQ_CONNECTION=amqp://myamqpserver.example.com:5672
 export QNDMQ_USERNAME=username
 export QNDMQ_PASSWORD=password
 export QNDMQ_QUEUE=queue
@@ -48,4 +48,5 @@ qndmq post Hello World!
 This project is made possible by the following awesome people:
 
 + [spf13](https://github.com/spf13) for [Cobra](https://github.com/spf13/cobra) released under the [Apache 2.0 license](https://github.com/spf13/cobra/blob/master/LICENSE.txt).
-+ [vcabbage](https://github.com/vcabbage) for [amqp](https://github.com/vcabbage/amqp) released uder the [MIT license](https://github.com/vcabbage/amqp/blob/master/LICENSE)
++ [vcabbage](https://github.com/vcabbage) for 1.0 compatible [amqp](https://github.com/vcabbage/amqp) released uder the [MIT license](https://github.com/vcabbage/amqp/blob/master/LICENSE)
++ [streadway](https://github.com/streadway) for 0.9.1 compatible [amqp](https://github.com/streadway/amqp) released under the [BSD license](https://github.com/streadway/amqp/blob/master/LICENSE)

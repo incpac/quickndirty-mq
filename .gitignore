@@ -16,3 +16,9 @@ temp/*
 
 # Dependencies
 vendor
+
+.vagrant
+
+quickndirty-mq
+
+*.log
