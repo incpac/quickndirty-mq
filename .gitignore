@@ -20,5 +20,6 @@ vendor
 .vagrant
 
 quickndirty-mq
+qndmq
 
 *.log
