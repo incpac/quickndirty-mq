@@ -10,7 +10,7 @@
   version = "v1.0"
 
 [[projects]]
-  digest = "1:c1c5e561b04c21f1a89743c5217af492c5cc34c86715a6a106fc867c9ac7bc3e"
+  digest = "1:fc41ec95f0f54e38799bfcd250a83f8475e87e6e8a060c35e884cd76b3b47b84"
   name = "github.com/incpac/quiet"
   packages = [
     ".",
@@ -18,8 +18,8 @@
     "config",
   ]
   pruneopts = "UT"
-  revision = "4c0919da6edc1f5f048882f0b54b82ccd44e5249"
-  version = "v0.1"
+  revision = "ee55bf2004debdee754c318efeeedd9cadc88f09"
+  version = "v0.2"
 
 [[projects]]
   digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
@@ -69,11 +69,8 @@
   analyzer-version = 1
   input-imports = [
     "github.com/incpac/quiet",
-    "github.com/incpac/quiet/amqp",
     "github.com/incpac/quiet/config",
     "github.com/spf13/cobra",
-    "github.com/streadway/amqp",
-    "pack.ag/amqp",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

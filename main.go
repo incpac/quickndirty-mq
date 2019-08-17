@@ -65,6 +65,17 @@ func watch() {
 	c.Close()
 }
 
+func get() {
+	c := createConnection()
+
+	msg, err := c.Get()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Printf("Retrieved message: %s", msg)
+}
+
 
 func main() {
 
@@ -88,9 +99,9 @@ func main() {
 		},
 	}
 
-	postCommand.Flags().StringVarP(&connectionString,	"connection",	"c",	os.Getenv("QNDMQ_CONNECTION"),	"The connection string for the Active MQ server")
-	postCommand.Flags().StringVarP(&username,		"username",	"u",	os.Getenv("QNDMQ_USERNAME"),	"The username to connect to Active MQ with")
-	postCommand.Flags().StringVarP(&password,		"password",	"p",	os.Getenv("QNDMQ_PASSWORD"),	"The password to connect to Active MQ with")
+	postCommand.Flags().StringVarP(&connectionString,	"connection",	"c",	os.Getenv("QNDMQ_CONNECTION"),	"The connection string for the MQ server")
+	postCommand.Flags().StringVarP(&username,		"username",	"u",	os.Getenv("QNDMQ_USERNAME"),	"The username to connect to MQ with")
+	postCommand.Flags().StringVarP(&password,		"password",	"p",	os.Getenv("QNDMQ_PASSWORD"),	"The password to connect to MQ with")
 	postCommand.Flags().StringVarP(&queueName,		"queue",	"q",	os.Getenv("QNDMQ_QUEUE"),	"The name of the queue to post to")
 
 	command.AddCommand(postCommand)
@@ -105,12 +116,29 @@ func main() {
 		},
 	}
 
-	watchCommand.Flags().StringVarP(&connectionString,	"connection",	"c",	os.Getenv("QNDMQ_CONNECTION"),	"The connection string for the Active MQ server")
-	watchCommand.Flags().StringVarP(&username,		"username",	"u",	os.Getenv("QNDMQ_USERNAME"),	"The username to connect to Active MQ with")
-	watchCommand.Flags().StringVarP(&password,		"password",	"p",	os.Getenv("QNDMQ_PASSWORD"),	"The password to connect to Active MQ with")
+	watchCommand.Flags().StringVarP(&connectionString,	"connection",	"c",	os.Getenv("QNDMQ_CONNECTION"),	"The connection string for the MQ server")
+	watchCommand.Flags().StringVarP(&username,		"username",	"u",	os.Getenv("QNDMQ_USERNAME"),	"The username to connect to MQ with")
+	watchCommand.Flags().StringVarP(&password,		"password",	"p",	os.Getenv("QNDMQ_PASSWORD"),	"The password to connect to MQ with")
 	watchCommand.Flags().StringVarP(&queueName,		"queue",	"q",	os.Getenv("QNDMQ_QUEUE"),	"The name of the queue to post to")
 
 	command.AddCommand(watchCommand)
+
+
+	getCommand := &cobra.Command{
+		Use:	"get",
+		Short:	"Get the next message in the queue",
+		Long:	"Get the next message in the queue",
+		Run:	func(cmd *cobra.Command, args []string) {
+			get()
+		},
+	}
+
+	getCommand.Flags().StringVarP(&connectionString,	"connection",	"c",	os.Getenv("QNDMQ_CONNECTION"),	"The connection string for the MQ server")
+	getCommand.Flags().StringVarP(&username,		"username",	"u",	os.Getenv("QNDMQ_USERNAME"),	"The username to connect to MQ with")
+	getCommand.Flags().StringVarP(&password,		"password",	"p",	os.Getenv("QNDMQ_PASSWORD"),	"The password to connect to MQ with")
+	getCommand.Flags().StringVarP(&queueName,		"queue",	"q",	os.Getenv("QNDMQ_QUEUE"),	"The name of the queue to post to")
+
+	command.AddCommand(getCommand)
 
 
 	if err := command.Execute(); err != nil {
